@@ -10,7 +10,7 @@ import sqlite3
 app = Flask(__name__)
 tzwhere = tzwhere.tzwhere()
 
-categories = [  # replace with user preferences, if ever adding that
+categories = [  # replace with user preferences, if ever adding that.
         {
         'name': 'Formula 1',
          'api_url': FORMULA1_URL,
