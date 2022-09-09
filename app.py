@@ -5,10 +5,14 @@ from urls import *
 from tzwhere import tzwhere
 import pytz
 import sqlite3
+import os
 
 
 app = Flask(__name__)
 tzwhere = tzwhere.tzwhere()
+
+port = int(os.environ.get("PORT", 5000))
+
 
 categories = [  # replace with user preferences, if ever adding that.
         {
@@ -120,4 +124,4 @@ def not_found(route):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=port, debug=True)
