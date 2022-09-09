@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+
+{% endblock %}
+
+{% block body %}
+
+    <script>
+        function tick()
+        {
+            var now = new Date().getTime();
+            for (var i = 0; i < dates.length; i++)
+            {
+                var timeRemaining = dates[i] - now;           
+                var daysRemaining = Math.floor(timeRemaining / day);
+                var hoursRemaining = Math.floor(timeRemaining % day / hour);
+                var minutesRemaining = Math.floor(timeRemaining % hour / minute);
+                var secondsRemaining = Math.floor(timeRemaining % minute / second);
+                var timeRemainingString = daysRemaining + ' days, '+ hoursRemaining + ' hours, ' + minutesRemaining + ' minutes and ' + secondsRemaining + ' seconds';
+                document.getElementById("countdown" + (i+1)).innerHTML = timeRemainingString;
+
+                // this shouldn't run here, should only run once
+                var userDate = new Date(listofstuff[i]);  // seems to automatically convert to my time zone AND I CANNOT CHANGE IT
+                document.getElementById("userTime" + (i+1)).innerHTML = userDate;
+
+                // var trackTimeZone = 
+                // var trackDate = new Date(listofstuff[i]);
+            }
+        }
+        const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+        let dates = {{datesMs|tojson}};  // is "|tojson" necessary?
+        let listofstuff = {{datesStr|tojson}};  // the worst names
+
+
+
+        x = setInterval(tick, 1000);  // update every 1000 ms
+    </script>
+
+    <h1 align="center">Races</h1>
+
+    <table style="border:5px solid black;margin-left:auto;margin-right:auto;">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Track time</th>
+                <th>Your time</th>
+                <th>Official website</th>
+                <th>Countdown</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for race in races %}
+                <tr>
+                    <th>{{ race.category }}</th>
+                    <th>{{ race.location }}</th>
+                    <th id="trackTime{{ loop.index }}">{{ race.track_time }}</th>
+                    <th id="userTime{{ loop.index }}">{{ race.user_time }}</th>
+                    <th><a href="{{ race.website }}">{{ race.website }}</a></th>
+                    <th id="countdown{{ loop.index }}"></th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+

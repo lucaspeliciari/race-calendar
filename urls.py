@@ -1,0 +1,7 @@
+FORMULA1_URL = "http://api.sportradar.us/formula1/trial/v2/en/sport_events/sr:stage:937183/schedule.json?api_key=zhjve6cm7jpkdajdrt8asanf"
+INDYCAR_URL = "http://api.sportradar.us/indycar/trial/v2/en/sport_events/sr:stage:948353/schedule.json?api_key=8mb2n37qsds7pbtdemcpdcge"
+FORMULAE_URL = "http://api.sportradar.us/formulae/trial/v2/en/sport_events/sr:stage:943661/schedule.json?api_key=kjztp5xeat2xud64y8zcf56s"
+WRC_URL = "http://api.sportradar.us/rally/trial/v2/en/sport_events/sr:stage:987997/schedule.json?api_key=8qne54pb63u8njget9pru8ks"
+INDYLIGHTS_URL = "http://api.sportradar.us/indylights/trial/v2/en/sport_events/sr:stage:985207/schedule.json?api_key=k4jb6p5xrkqszxhmcgwutbwp"
+MOTOGP_URL = "http://api.sportradar.us/motogp/trial/v2/en/sport_events/sr:stage:971325/summary.json?api_key=8wef5c4bbc7qwwrnzhsmt23m"
+SUPERBIKE_URL = "http://api.sportradar.us/motogp/trial/v2/en/sport_events/sr:stage:987367/schedule.json?api_key=8wef5c4bbc7qwwrnzhsmt23m"

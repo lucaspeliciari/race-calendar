@@ -1,0 +1,28 @@
+.red
+{
+    color: #aa0000;
+}
+
+.green
+{
+    color: #00aa00;
+}
+
+.verticalLine
+{
+    border-right:1px #ff0000;
+}
+
+tbody tr:nth-child(odd) { background-color: #eeeeee; }
+tbody tr:nth-child(even) { background-color: #ffffff; }
+
+th, td {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+table {
+  border-spacing: 30px;
+}
