@@ -1,3 +1,3 @@
 # race-calendar
 Flask app with info about motorsport.
-WiP
+Made as the CS50 final project.
