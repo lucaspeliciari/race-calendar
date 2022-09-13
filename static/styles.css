@@ -1,11 +1,13 @@
 .warning
 {
     color: #aa0000;
+    text-align:center;
 }
 
 .success
 {
     color: #00aa00;
+    text-align:center;
 }
 
 .verticalLine

@@ -188,9 +188,9 @@ def logout():
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
+    user_categories = get_user_categories(session['id'])
+    category_names = [x['name'] for x in categories]
     if request.method == 'GET':
-        user_categories = get_user_categories(session['id'])
-        category_names = [x['name'] for x in categories]
         return render_template('/account.html', categories=category_names, user_categories=user_categories)
 
     elif request.method == 'POST':
@@ -200,15 +200,15 @@ def account():
 
             update_user_categories(session['id'], checkboxes)
 
-            return redirect('/account')
+            return render_template('/account.html', categories=category_names, user_categories=user_categories, success_preferences='Preferences saved')
 
         elif request.form['button'] == 'delete_account':
             password = request.form.get('password')
             confirm_password = request.form.get('confirm_password')
             if not password or not confirm_password:
-                return render_template('/account.html', warning_delete="You must fill all fields")
+                return render_template('/account.html', categories=category_names, user_categories=user_categories, warning_delete="You must fill all fields")
             if password != confirm_password:
-                return render_template('/account.html', warning_delete="Passwords do not match")
+                return render_template('/account.html', categories=category_names, user_categories=user_categories, warning_delete="Passwords do not match")
             delete_user(session['id'])
 
             return redirect('/logout')
