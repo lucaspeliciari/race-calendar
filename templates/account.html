@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+
+{% endblock %}
+
+{% block body %}
+
+    <script>
+        all_categories = {{categories|tojson}};
+        user_categories = {{user_categories|tojson}};
+
+        document.addEventListener('DOMContentLoaded', function() {
+            for (var i = 0; i < all_categories.length; i++)
+            {
+                if (user_categories.indexOf(all_categories[i]) != -1)
+                {
+                    document.getElementById("category" + (i + 1)).checked = true;
+                }
+            }
+        });
+        
+    </script>
+
+    <h1 align="center">Preferences</h1>
+    <p class="warning_preferences">{{ warning_preferences }}</p>
+    <p class="success_preferences">{{ success_preferences }}</p>
+
+    <form action="/account" method="post">
+
+        <table style="border:5px solid black;margin-left:auto;margin-right:auto;">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Follow</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <th>{{ category }}</th>
+                        <th><input type="checkbox" id="category{{ loop.index }}" name="category_checkbox" value="{{ category }}"></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit" name="button" value="change_preferences">Change preferences</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <h1 align="center">Delete account</h1>
+    <p class="warning_delete">{{ warning_delete }}</p>
+    <p class="success_delete">{{ success_delete }}</p>
+
+    <form class="content" action="/account" method="post">
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirm_password" placeholder="Confirm password" type="password">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-danger" type="submit" name="button" value="delete_account">Delete account</button>
+        </div>
+    </form>
+
+{% endblock %}
+
+
+

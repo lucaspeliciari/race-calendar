@@ -13,27 +13,30 @@
             var now = new Date().getTime();
             for (var i = 0; i < dates.length; i++)
             {
-                var timeRemaining = dates[i] - now;           
-                var daysRemaining = Math.floor(timeRemaining / day);
-                var hoursRemaining = Math.floor(timeRemaining % day / hour);
-                var minutesRemaining = Math.floor(timeRemaining % hour / minute);
-                var secondsRemaining = Math.floor(timeRemaining % minute / second);
-                var timeRemainingString = daysRemaining + ' days, '+ hoursRemaining + ' hours, ' + minutesRemaining + ' minutes and ' + secondsRemaining + ' seconds';
+                var timeRemaining = dates[i] - now;
+                var timeRemainingString = 'Concluded';
+                if (timeRemaining > 0)
+                {
+                    var daysRemaining = Math.floor(timeRemaining / day);
+                    var hoursRemaining = Math.floor(timeRemaining % day / hour);
+                    var minutesRemaining = Math.floor(timeRemaining % hour / minute);
+                    var secondsRemaining = Math.floor(timeRemaining % minute / second);
+                    timeRemainingString = daysRemaining + ' days, '+ hoursRemaining + ' hours, ' + minutesRemaining + ' minutes and ' + secondsRemaining + ' seconds';
+                }
                 document.getElementById("countdown" + (i+1)).innerHTML = timeRemainingString;
-
-                // this shouldn't run here, should only run once
-                var userDate = new Date(listofstuff[i]);  // seems to automatically convert to my time zone AND I CANNOT CHANGE IT
-                document.getElementById("userTime" + (i+1)).innerHTML = userDate;
-
-                // var trackTimeZone = 
-                // var trackDate = new Date(listofstuff[i]);
             }
         }
         const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
         let dates = {{datesMs|tojson}};  // is "|tojson" necessary?
         let listofstuff = {{datesStr|tojson}};  // the worst names
 
-
+        document.addEventListener('DOMContentLoaded', function() {
+            for (var i = 0; i < dates.length; i++)
+            {
+                var userDate = new Date(listofstuff[i]);  // seems to automatically convert to my time zone AND I CANNOT CHANGE IT
+                document.getElementById("userTime" + (i+1)).innerHTML = userDate;
+            }
+        });
 
         x = setInterval(tick, 1000);  // update every 1000 ms
     </script>
