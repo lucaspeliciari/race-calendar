@@ -52,7 +52,7 @@ def index():
 
             # request all data from sportradar.com
             data = request_data(category['api_url'])
-            number_of_races = len(data['stages'])
+            last_race = data['stages'][-1]['venue']['name']
 
             # find next race
             now = datetime.datetime.now()
@@ -66,12 +66,15 @@ def index():
                     status = 'Not Cancelled'
 
                 # display past races, or don't
-                # bugged, with setting active it always shows first race of the year
-                if now > date_obj or status == 'Cancelled' and i != number_of_races-1:
+                # ugly
+                # if are terrible
+                if status == 'Cancelled':
                     continue
-                elif (i == number_of_races-1 and 
-                    (session.get('id') is not None and get_user_setting(session['id'], 'Show past races'))):
-                    pass
+                elif now > date_obj:
+                    if data['stages'][i]['venue']['name'] != last_race:
+                        continue
+                    elif session.get('id') is None or not get_user_setting(session['id'], 'Show past races'):
+                        continue
 
                 # get time remaining until race, in ms
                 date_ms = milliseconds(date_obj)
